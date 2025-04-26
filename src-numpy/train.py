@@ -11,7 +11,7 @@ from optimizer import *
 train_size = x_train.shape[0]
 iters_num = 10000
 batch_size = 100
-learning_rate = 0.005
+learning_rate = 0.1
 iters_per_epoch = max(train_size // batch_size, 1)
 
 # network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
@@ -30,7 +30,7 @@ for i in range(iters_num):
 
     grads = network.gradient(x_batch, t_batch)
     params = network.params
-    optimizer = Momentum(learning_rate)
+    optimizer = SGD(learning_rate)
     optimizer.update(params, grads)
 
     loss = network.loss(x_batch, t_batch)

@@ -10,7 +10,7 @@ from optimizer import *
 
 train_size = x_train.shape[0]
 iters_num = 10000
-batch_size = 1
+batch_size = 100
 learning_rate = 0.005
 iters_per_epoch = max(train_size // batch_size, 1)
 
@@ -48,18 +48,16 @@ path = "/data/data/com.termux/files/home/storage/dcim/Graph"
 x1 = np.arange(len(train_loss_list))
 x2 = np.arange(len(train_acc_list))
 
-plt.figure(figsize=(10, 4))  # 도화지 크기 설정 (가로 10, 세로 4)
+plt.figure(figsize=(10, 4))
 
-# 첫 번째 그래프: 손실
-plt.subplot(1, 2, 1)  # 1행 2열 중 첫 번째
+plt.subplot(1, 2, 1)  
 plt.plot(x1, train_loss_list, label='train loss')
 plt.xlabel("iters")
 plt.ylabel("loss")
 plt.legend()
 plt.title("Loss Curve")
 
-# 두 번째 그래프: 정확도
-plt.subplot(1, 2, 2)  # 1행 2열 중 두 번째
+plt.subplot(1, 2, 2) 
 plt.plot(x2, train_acc_list, label='train acc')
 plt.plot(x2, test_acc_list, label='test acc')
 plt.xlabel("epochs")
@@ -67,6 +65,6 @@ plt.ylabel("accuracy")
 plt.legend()
 plt.title("Accuracy Curve")
 
-plt.tight_layout()  # 그래프 간 여백 자동 조절
-plt.savefig(path + '/adagrad_training_result.png')
+plt.tight_layout()  
+plt.savefig(path + '/training_result.png')
 plt.clf()

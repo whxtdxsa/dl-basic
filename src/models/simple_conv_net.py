@@ -10,14 +10,16 @@ class SimpleConvNet:
         filter_size = conv_param['filter_size']
         pad = conv_param['pad']
         stride = conv_param['stride']
-
-        input_size = input_dim[1]
-        conv_output_size = int(1 + (input_size + 2 * pad - filter_size) / stride)
-        pool_output_size = int(1 + (conv_output_size - 2) / 2)
+        
+        c_size, h_size, w_size = input_dim
+        input_size = c_size * h_size * w_size
+        conv_output_size = int(1 + (h_size + 2 * pad - filter_size) / stride)
+        # pool_output_size = int(1 + (conv_output_size - 2) / 2)
+        #
         self.params = {}
-        self.params['W1'] = np.sqrt(2/input_size) * np.random.randn(filter_num, input_dim[0], filter_size, filter_size)
+        self.params['W1'] = np.sqrt(2/input_size) * np.random.randn(filter_num, c_size, filter_size, filter_size)
         self.params['b1'] = np.zeros(filter_num)
-        h2 = pool_output_size * pool_output_size * filter_num
+        h2 = conv_output_size * conv_output_size * filter_num
         self.params['W2'] = np.sqrt(2/h2) * np.random.randn(h2, hidden_size)
         self.params['b2'] = np.zeros(hidden_size)
         self.params['W3'] = np.sqrt(2/hidden_size) * np.random.randn(hidden_size, output_size)
@@ -26,15 +28,14 @@ class SimpleConvNet:
         self.layers = OrderedDict()
         self.layers['Conv1'] = Convolution(self.params['W1'], self.params['b1'], stride, pad)
         self.layers['Relu1'] = Relu()
-        self.layers['Pooling1'] = Pooling(pool_h=2, pool_w=2, stride=2, pad=0)
+        # self.layers['Pooling1'] = Pooling(pool_h=2, pool_w=2, stride=2, pad=0)
         self.layers['Affine1'] = Affine(self.params['W2'], self.params['b2'])
         self.layers['Relu2'] = Relu()
         self.layers['Affine2'] = Affine(self.params['W3'], self.params['b3'])
         self.last_layer = SoftmaxWithLoss()
 
     def predict(self, x):
-        for l,layer in self.layers.items():
-            print(l)
+        for layer in self.layers.values():
             x = layer.forward(x)
 
         return x

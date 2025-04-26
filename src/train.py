@@ -10,12 +10,12 @@ from optimizer import *
 
 train_size = x_train.shape[0]
 iters_num = 10000
-batch_size = 100
+batch_size = 1
 learning_rate = 0.005
 iters_per_epoch = max(train_size // batch_size, 1)
 
 # network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
-network = SimpleConvNet(input_dim=(1, 28, 28), conv_param={'filter_num': 1, 'filter_size': 5, 'pad':0, 'stride':2}, hidden_size=10)
+network = SimpleConvNet(input_dim=(1, 28, 28), conv_param={'filter_num': 30, 'filter_size': 5, 'pad':0, 'stride':2}, hidden_size=50, output_size=10)
 x_train = x_train.reshape(x_train.shape[0], 1, 28, 28)
 x_test = x_test.reshape(x_test.shape[0], 1, 28, 28)
 
@@ -30,7 +30,7 @@ for i in range(iters_num):
 
     grads = network.gradient(x_batch, t_batch)
     params = network.params
-    optimizer = AdaGrad(learning_rate)
+    optimizer = Momentum(learning_rate)
     optimizer.update(params, grads)
 
     loss = network.loss(x_batch, t_batch)

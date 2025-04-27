@@ -1,5 +1,5 @@
 from data.mnist import load_mnist
-from model.two_layer_net import TwoLayerNet
+from model.conv_net import ConvNet
 from dataloader import NumpyDataset
 from torch.utils.data import DataLoader
 
@@ -13,7 +13,6 @@ lr = 0.01
 epochs = 10
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=False)
 
@@ -23,7 +22,7 @@ test_dataset = NumpyDataset(x_test, t_test)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
 
-network = TwoLayerNet(input_size=x_train.shape[1], hidden_size=50, output_size=10).to(device)
+network = ConvNet().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(network.parameters(), lr)
 

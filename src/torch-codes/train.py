@@ -23,7 +23,7 @@ train_dataset = NumpyDataset(x_train, t_train)
 test_dataset = NumpyDataset(x_test, t_test)
 
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 network = ConvNet().to(device)
 criterion = nn.CrossEntropyLoss()

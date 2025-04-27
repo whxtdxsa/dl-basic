@@ -41,8 +41,8 @@ for i in range(iters_num):
         print(f"epochs {i//iters_per_epoch}/{iters_num//iters_per_epoch} | train_acc: {train_acc:.4f} | test_acc: {test_acc:.4f}")
 
 import matplotlib.pyplot as plt
-path = "/data/data/com.termux/files/home/storage/dcim/Graph"
-
+#path = "/data/data/com.termux/files/home/storage/dcim/Graph"
+path = "."
 x1 = np.arange(len(train_loss_list))
 x2 = np.arange(len(train_acc_list))
 

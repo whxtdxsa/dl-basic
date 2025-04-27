@@ -60,8 +60,8 @@ for epoch in range(epochs):
             preds = outputs.argmax(dim=1)
             correct += (preds == t_batch).sum().item()
             total += t_batch.size(0)
-        acc = correct / total
-        test_acc_list.append(acc)
+        test_acc = correct / total
+        test_acc_list.append(test_acc)
 
         correct = 0
         total = 0
@@ -71,10 +71,10 @@ for epoch in range(epochs):
             preds = outputs.argmax(dim=1)
             correct += (preds == t_batch).sum().item()
             total += t_batch.size(0)
-        acc = correct / total
-        train_acc_list.append(acc)
+        train_acc = correct / total
+        train_acc_list.append(train_acc)
 
-    print(f"epoch {epoch}: train_loss {running_loss/len(train_loader):.4f}, train_acc {acc:.4f}, test_acc {acc:.4f}")
+    print(f"epoch {epoch}: train_loss {running_loss/len(train_loader):.4f}, train_acc {train_acc:.4f}, test_acc {test_acc:.4f}")
 
 
 import matplotlib.pyplot as plt

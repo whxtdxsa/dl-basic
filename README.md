@@ -71,7 +71,7 @@ Loss: Cross Entropy
 ---
 
 ![SmartSelect_20250422_235141_Notion.jpg](asset/SmartSelect_20250422_235141_Notion.jpg)
-
+Android 14 aarch64 without external GPU.
 # NLP
 
 

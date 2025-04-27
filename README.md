@@ -1,17 +1,4 @@
-# dl-study
-
-# Dive To Deep Learning
-
-Date: April 21, 2025
-Multi-select: Vision
-Select: Study
-Status: In progress
-
 # Overview
-
----
-
-[https://github.com/whxtdxsa/dl-basic.git](https://github.com/whxtdxsa/dl-basic.git)
 
 딥러닝 이론이 인공지능 학습에 실제로 어떻게 적용되는 지 알아보는 프로젝트입니다. 
 
@@ -34,9 +21,38 @@ Numpy로 작성된 신경망을 Pytorch로 사용하여 재구성합니다. Pyto
 - DeepLearning(Ian Goodfellow, Yoshua Bengio, Aaron Courville · 2016)
 - 밑바닥부터 시작하는 딥러닝(사이코 고키)
 
-# Theory2Numpy
+### Entire Directory Structure
 
 ---
+
+```
+dl-basic
+├── README.md
+├── pyproject.toml
+└── src
+    ├── data
+    │   ├── mnist.py
+    ├── numpy-codes
+    │   ├── __init__.py
+    │   ├── functions.py
+    │   ├── layers.py
+    │   ├── models
+    │   │   ├── __init__.py
+    │   │   ├── simple_conv_net.py
+    │   │   └── two_layer_net.py
+    │   ├── optimizer.py
+    │   ├── train.py
+    │   └── util.py
+    └── torch-codes
+        ├── __init__.py
+        ├── dataloader.py
+        ├── model
+        │   └── conv_net.py
+        └── train.py
+```
+
+# Theory2Numpy
+
 
 ### Project Information
 
@@ -46,46 +62,18 @@ Task Type: Classification
 
 Data: MNIST dataset
 
-Model: Two Layer Net & CNN
+Model: Two Layer Net & SimpleConvNet
 Loss: Cross Entropy
 
-### Directory Structure
-
----
-
-proj/
-
-|- - data/
-
-|- - src/
-
-      |- - models/
-
-            |- - two_layer_net.py
-
-      |- - layers.py
-
-      |- - train.py
-
-      |- - utils.py
-
-      |- - functions.py
 
 ### Development Environment
 
 ---
 
-![SmartSelect_20250422_235141_Notion.jpg](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250422_235141_Notion.jpg)
-
-OS: Android 14 aarch64
-
-Python 3.12.10
-
-Numpy 2.2.4
+![SmartSelect_20250422_235141_Notion.jpg](asset/SmartSelect_20250422_235141_Notion.jpg)
 
 # NLP
 
----
 
 ### Model: Two Layer Net
 
@@ -115,9 +103,9 @@ class TwoLayerNet:
     - When a model is used in inferrence, it doesn’t use last layer specifically in softmax layer.
     - It is useful when the user want to customize the last layer.
 
-![Structure of Two Layer Net](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250421_203928_Samsung_Notes.jpg)
+![Structure of Two Layer Net.](asset/SmartSelect_20250421_203928_Samsung_Notes.jpg)
 
-Structure of Two Layer Net
+Structure of Two Layer Net.
 
 ```python
 class TwoLayerNet:
@@ -155,7 +143,6 @@ class TwoLayerNet:
 - Meaning of axis=n in numpy
     - When shape is (D0, D1, …, Dk), the shape of result would be (D0, D1, …, Dk) without Dn.
     - Calculate in the dimension without n-th dim.
-    
 
 ### Layers
 
@@ -245,11 +232,11 @@ class SoftmaxWithLoss:
 - The reason for saving loss to self.loss: SoftmaxWithLoss is a layer so that it is general to have its states. We can refer to it whenever we need without computing it again.
 - dx[np.arange(batch_size), self.t] -= 1: For each batches extract the true label from y.
 
-![Computational Graph of backward propagation for getting gradient.](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250422_202004_Samsung_Notes.jpg)
+![Computational Graph of backward propagation for getting gradient.](asset/SmartSelect_20250422_202004_Samsung_Notes.jpg)
 
 Computational Graph of backward propagation for getting gradient.
 
-![Computational Graph of Softmax with cross entropy](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250423_222815_Samsung_Notes.jpg)
+![Computational Graph of Softmax with cross entropy](asset/SmartSelect_20250423_222815_Samsung_Notes.jpg)
 
 Computational Graph of Softmax with cross entropy
 
@@ -288,17 +275,16 @@ for i in range(iters_num):
         train_acc_list.append(train_acc)
         test_acc_list.append(test_acc)
         print(f"epochs {i//iters_per_epoch}/{iters_num//iters_per_epoch} | train_acc: {train_acc:.4f} | test_acc: {test_acc:.4f}")
-
 ```
 
 - Stochastic Gradient Descent
     - Get random batch masks for each iterations.
     - Define an epoch as comsuming all training data assumed that there is no same data between each batches.
-    - We can calculate total epoch before training: iters_num / iters_per_epoch
+    - We can calculate total epoch before training: iters_num / iters_per_epoch.
 
-![Loss graph for 10000 iterations. The variance is larger and loss is smaller during training. Accuracy for each epochs. It converged close to 1.0 accuracy during training.](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/training_result.png)
+![Loss and accuracy graphs of TwoLayerNet for 10000 iterations. The variance is larger while loss is smaller during training.  The accuarcy converged close to 1.0 accuracy during training.](asset/training_result.png)
 
-Loss graph for 10000 iterations. The variance is larger and loss is smaller during training. Accuracy for each epochs. It converged close to 1.0 accuracy during training.
+Loss and accuracy graphs of TwoLayerNet for 10000 iterations. The variance is larger while loss is smaller during training.  The accuarcy converged close to 1.0 accuracy during training.
 
 - The usage of matplotlib for getting a graph
     
@@ -329,7 +315,6 @@ Loss graph for 10000 iterations. The variance is larger and loss is smaller duri
     plt.tight_layout()  
     plt.savefig(path + '/training_result.png')
     plt.clf()
-    
     ```
     
 
@@ -377,17 +362,16 @@ class AdaGrad:
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 ```
 
-![Loss and accuracy graph of Momentum with lr = 0.05.](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/momentum_training_result.png)
+![Loss and accuracy graphs of TwoLayerNet with momentum optimizer and lr = 0.05.](asset/momentum_training_result.png)
 
-Loss and accuracy graph of Momentum with lr = 0.05.
+Loss and accuracy graphs of TwoLayerNet with momentum optimizer and lr = 0.05.
 
-![Loss and accuracy graph of AdaGrad with lr = 0.03.](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/adagrad_training_result.png)
+![Loss and accuracy graphs of TwoLayerNet with AdaGrad optimizer and lr = 0.03.](asset/adagrad_training_result.png)
 
-Loss and accuracy graph of AdaGrad with lr = 0.03.
+Loss and accuracy graphs of TwoLayerNet with AdaGrad optimizer and lr = 0.03.
 
 # CNN
 
----
 
 ### Model: SimpleConvNet
 
@@ -403,7 +387,7 @@ class SimpleConvNet:
         input_size = c_size * h_size * w_size
         conv_output_size = int(1 + (h_size + 2 * pad - filter_size) / stride)
         # pool_output_size = int(1 + (conv_output_size - 2) / 2)
-        #
+        
         self.params = {}
         self.params['W1'] = np.sqrt(2/input_size) * np.random.randn(filter_num, c_size, filter_size, filter_size)
         self.params['b1'] = np.zeros(filter_num)
@@ -421,10 +405,13 @@ class SimpleConvNet:
         self.layers['Relu2'] = Relu()
         self.layers['Affine2'] = Affine(self.params['W3'], self.params['b3'])
         self.last_layer = SoftmaxWithLoss()
-
 ```
 
-- By resorce issue of work environment, I should remove pooling layer. The pooling layer takes much resource during training.
+![Structure of SimpleConvNet.](asset/SmartSelect_20250426_210109_Samsung_Notes.jpg)
+
+Structure of SimpleConvNet.
+
+- By resorce issue of workspace environment, I should remove pooling layer. The pooling layer takes much resource during training.
 
 ### Layers
 
@@ -479,7 +466,6 @@ class Convolution:
         dx = col2im(dx, self.x.shape, FH, FW, self.stride, self.pad)
         
         return dx
-
 ```
 
 ```python
@@ -518,22 +504,30 @@ class Pooling:
         dx = col2im(dx, self.x.shape, self.pool_h, self.pool_w, self.stride, self.pad)
 
         return dx
-
 ```
 
-![Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250426_152747_Samsung_Notes.jpg)
+![Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.](asset/SmartSelect_20250426_152747_Samsung_Notes.jpg)
 
 Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.
 
-![Structure of pooling layer. Simmiliar tricks with convolution layer](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/SmartSelect_20250426_152803_Samsung_Notes.jpg)
+![Structure of pooling layer. Simmilar tricks with convolution layer.](asset/SmartSelect_20250426_152803_Samsung_Notes.jpg)
 
-Structure of pooling layer. Simmiliar tricks with convolution layer
+Structure of pooling layer. Simmilar tricks with convolution layer.
+
+- x.flatten() vs x.reshape(-1)
+    - The flatten method excutes deep copy of x but reshape method just give view structure to user. So in memory aspect it is efficient to use reshape method instead flatten method.
+- Calculate multi dimensional tensor vs calculate two dimensional transformed matrix.
+    - Inside numpy, there is computational pros when using ndarray rather than using for loop.
+    - In many DL libraries, the multi dimensional tensor is transformed in two dimensional matrix.
+    
 
 ### Training
 
 ---
 
-![training_result.png](Dive%20To%20Deep%20Learning%201dc5167b75fd80398b6be0bd5191072b/training_result%201.png)
+![Loss and accuracy graphs of SimpleConvNet. The loss decreases stablely compare to TwoLayerNet.](asset/training_result%201.png)
+
+Loss and accuracy graphs of SimpleConvNet. The loss decreases stablely compare to TwoLayerNet.
 
 - Higher accuracy than NLP
     - CNN can reflect the structure of neighborhood in data.
@@ -543,4 +537,181 @@ Structure of pooling layer. Simmiliar tricks with convolution layer
 
 # Numpy2Pytorch
 
+
+### Project Information
+
 ---
+
+Task Type: Classification
+
+Data: MNIST dataset
+
+Model: ConvNet
+
+Loss: Cross Entropy
+
+
+### Development Environment
+
+---
+
+![Ubuntu 22.04.3 LTS with NVIDIA RTX A5000](asset/SmartSelect_20250427_160255_Termux.jpg)
+
+Ubuntu 22.04.3 LTS with NVIDIA RTX A5000
+
+### Model: ConvNet
+
+---
+
+![Structure of ConvNet.](asset/SmartSelect_20250427_161958_Samsung_Notes.jpg)
+
+Structure of ConvNet.
+
+```python
+class ConvNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=16, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+
+        self.fc1 = nn.Linear(3136, 512)
+        self.fc2 = nn.Linear(512, 128)
+        self.fc3 = nn.Linear(128, 10)
+
+        self.relu = nn.ReLU()
+    
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.relu(x)
+        x = self.pool(x)
+        x = self.conv2(x)
+        x = self.relu(x)
+
+        x = x.reshape(x.shape[0], -1)
+        
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        x = self.relu(x)
+        x = self.fc3(x)
+
+        return x
+
+```
+
+- The backward fucntion is not needed when using torch since the gradient of each layers are included in the library.
+
+### Dataloader
+
+---
+
+```python
+class CustomDataset(Dataset):
+    def __init__(self, x, t):
+        self.x = torch.tensor(x, dtype=torch.float32)
+        self.t = torch.tensor(t, dtype=torch.long)
+
+    def __len__(self):
+        return len(self.x)
+
+    def __getitem__(self, idx):
+        return self.x[idx], self.t[idx]
+
+```
+
+- The data should be torch.tensor not ndarray. The DataLoader function in torch would get CustomDataset in its parameters. In CustomDataset, len and getitem method should be implemented.
+
+### Training
+
+---
+
+![Loss and accuracy graphs of ConvNet. Used 16 epoch, 0.01 learning rate and SGD optimizer.](asset/training_result_cnn.png)
+
+Loss and accuracy graphs of ConvNet. Used 16 epoch, 0.01 learning rate and SGD optimizer.
+
+```python
+batch_size = 100
+lr = 0.01
+epochs = 16
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=False)
+
+x_train = x_train.reshape(-1, 1, 28, 28)
+x_test = x_test.reshape(-1, 1, 28, 28)
+
+train_dataset = CustomDataset(x_train, t_train)
+test_dataset = CustomDataset(x_test, t_test)
+
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+network = ConvNet().to(device)
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(network.parameters(), lr)
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+for epoch in range(epochs):
+    network.train()
+    running_loss = 0.0
+
+    for x_batch, t_batch in train_loader:
+        x_batch, t_batch = x_batch.to(device), t_batch.to(device)
+
+        optimizer.zero_grad()
+        outputs = network(x_batch)
+        loss = criterion(outputs, t_batch)
+        loss.backward()
+        optimizer.step()
+    
+        running_loss += loss.item()
+
+    train_loss_list.append(running_loss / len(train_loader))
+
+    network.eval()
+    with torch.no_grad():
+        correct = 0
+        total = 0
+        for x_batch, t_batch in test_loader:
+            x_batch, t_batch = x_batch.to(device), t_batch.to(device)
+            outputs = network(x_batch)
+            preds = outputs.argmax(dim=1)
+            correct += (preds == t_batch).sum().item()
+            total += t_batch.size(0)
+        test_acc = correct / total
+        test_acc_list.append(test_acc)
+
+        correct = 0
+        total = 0
+        for x_batch, t_batch in train_loader:
+            x_batch, t_batch = x_batch.to(device), t_batch.to(device)
+            outputs = network(x_batch)
+            preds = outputs.argmax(dim=1)
+            correct += (preds == t_batch).sum().item()
+            total += t_batch.size(0)
+        train_acc = correct / total
+        train_acc_list.append(train_acc)
+
+    print(f"epoch {epoch}: train_loss {running_loss/len(train_loader):.4f}, train_acc {train_acc:.4f}, test_acc {test_acc:.4f}")
+
+```
+
+- network.eval():   the parameters don’t change when the data flow into the model.
+- torch.no_grad(): the torch doesn’t chase values which are essential for computing gradient. It could save computing resource.
+- Loss and Accuracy are measured per epoch.
+
+# Future Works
+
+
+- Apply special layers.
+    - Batch normalization.
+    - Drop out.
+- Use tqdm library for recording.
+- Memorise the model parameters in the middle of traning.
+- Use other models.
+    - ResNet, UNet, Transformer etc.

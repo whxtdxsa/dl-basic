@@ -1,5 +1,5 @@
-import torch as nn
-import torch.nn
+import torch
+import torch.nn as nn
 
 class ConvNet(nn.Module):
     def __init__(self):
@@ -18,7 +18,7 @@ class ConvNet(nn.Module):
         x = self.conv1(x)
         x = self.relu(x)
         x = self.pool(x)
-        x = self.conv1(x)
+        x = self.conv2(x)
         x = self.relu(x)
 
         x = x.reshape(x.shape[0], -1)

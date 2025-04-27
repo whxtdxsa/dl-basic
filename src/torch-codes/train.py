@@ -1,6 +1,6 @@
 from data.mnist import load_mnist
 from model.conv_net import ConvNet
-from dataloader import NumpyDataset
+from dataloader import CustomDataset
 from torch.utils.data import DataLoader
 
 import numpy as np
@@ -19,8 +19,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 x_train = x_train.reshape(-1, 1, 28, 28)
 x_test = x_test.reshape(-1, 1, 28, 28)
 
-train_dataset = NumpyDataset(x_train, t_train)
-test_dataset = NumpyDataset(x_test, t_test)
+train_dataset = CustomDataset(x_train, t_train)
+test_dataset = CustomDataset(x_test, t_test)
 
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)

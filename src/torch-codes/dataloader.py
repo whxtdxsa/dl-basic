@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import Dataset
 
-class NumpyDataset(Dataset):
+class CustomDataset(Dataset):
     def __init__(self, x, t):
         self.x = torch.tensor(x, dtype=torch.float32)
         self.t = torch.tensor(t, dtype=torch.long)

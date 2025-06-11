@@ -70,7 +70,7 @@ Loss: Cross Entropy
 
 ---
 
-![SmartSelect_20250422_235141_Notion.jpg](asset/SmartSelect_20250422_235141_Notion.jpg)
+![SmartSelect_20250422_235141_Notion.jpg](assets/SmartSelect_20250422_235141_Notion.jpg)
 Android 14 aarch64 without external GPU.
 # NLP
 
@@ -103,7 +103,7 @@ class TwoLayerNet:
     - When a model is used in inferrence, it doesn’t use last layer specifically in softmax layer.
     - It is useful when the user want to customize the last layer.
 
-![Structure of Two Layer Net.](asset/SmartSelect_20250421_203928_Samsung_Notes.jpg)
+![Structure of Two Layer Net.](assets/SmartSelect_20250421_203928_Samsung_Notes.jpg)
 
 Structure of Two Layer Net.
 
@@ -232,11 +232,11 @@ class SoftmaxWithLoss:
 - The reason for saving loss to self.loss: SoftmaxWithLoss is a layer so that it is general to have its states. We can refer to it whenever we need without computing it again.
 - dx[np.arange(batch_size), self.t] -= 1: For each batches extract the true label from y.
 
-![Computational Graph of backward propagation for getting gradient.](asset/SmartSelect_20250422_202004_Samsung_Notes.jpg)
+![Computational Graph of backward propagation for getting gradient.](assets/SmartSelect_20250422_202004_Samsung_Notes.jpg)
 
 Computational Graph of backward propagation for getting gradient.
 
-![Computational Graph of Softmax with cross entropy](asset/SmartSelect_20250423_222815_Samsung_Notes.jpg)
+![Computational Graph of Softmax with cross entropy](assets/SmartSelect_20250423_222815_Samsung_Notes.jpg)
 
 Computational Graph of Softmax with cross entropy
 
@@ -282,7 +282,7 @@ for i in range(iters_num):
     - Define an epoch as comsuming all training data assumed that there is no same data between each batches.
     - We can calculate total epoch before training: iters_num / iters_per_epoch.
 
-![Loss and accuracy graphs of TwoLayerNet for 10000 iterations. The variance is larger while loss is smaller during training.  The accuarcy converged close to 1.0 accuracy during training.](asset/training_result.png)
+![Loss and accuracy graphs of TwoLayerNet for 10000 iterations. The variance is larger while loss is smaller during training.  The accuarcy converged close to 1.0 accuracy during training.](assets/training_result.png)
 
 Loss and accuracy graphs of TwoLayerNet for 10000 iterations. The variance is larger while loss is smaller during training.  The accuarcy converged close to 1.0 accuracy during training.
 
@@ -362,11 +362,11 @@ class AdaGrad:
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 ```
 
-![Loss and accuracy graphs of TwoLayerNet with momentum optimizer and lr = 0.05.](asset/momentum_training_result.png)
+![Loss and accuracy graphs of TwoLayerNet with momentum optimizer and lr = 0.05.](assets/momentum_training_result.png)
 
 Loss and accuracy graphs of TwoLayerNet with momentum optimizer and lr = 0.05.
 
-![Loss and accuracy graphs of TwoLayerNet with AdaGrad optimizer and lr = 0.03.](asset/adagrad_training_result.png)
+![Loss and accuracy graphs of TwoLayerNet with AdaGrad optimizer and lr = 0.03.](assets/adagrad_training_result.png)
 
 Loss and accuracy graphs of TwoLayerNet with AdaGrad optimizer and lr = 0.03.
 
@@ -407,7 +407,7 @@ class SimpleConvNet:
         self.last_layer = SoftmaxWithLoss()
 ```
 
-![Structure of SimpleConvNet.](asset/SmartSelect_20250426_210109_Samsung_Notes.jpg)
+![Structure of SimpleConvNet.](assets/SmartSelect_20250426_210109_Samsung_Notes.jpg)
 
 Structure of SimpleConvNet.
 
@@ -506,11 +506,11 @@ class Pooling:
         return dx
 ```
 
-![Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.](asset/SmartSelect_20250426_152747_Samsung_Notes.jpg)
+![Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.](assets/SmartSelect_20250426_152747_Samsung_Notes.jpg)
 
 Structure of convolution layer. To get computational efficiency, we transform multi dimensional tensor to two dimensional matrix.
 
-![Structure of pooling layer. Simmilar tricks with convolution layer.](asset/SmartSelect_20250426_152803_Samsung_Notes.jpg)
+![Structure of pooling layer. Simmilar tricks with convolution layer.](assets/SmartSelect_20250426_152803_Samsung_Notes.jpg)
 
 Structure of pooling layer. Simmilar tricks with convolution layer.
 
@@ -525,7 +525,7 @@ Structure of pooling layer. Simmilar tricks with convolution layer.
 
 ---
 
-![Loss and accuracy graphs of SimpleConvNet. The loss decreases stablely compare to TwoLayerNet.](asset/training_result%201.png)
+![Loss and accuracy graphs of SimpleConvNet. The loss decreases stablely compare to TwoLayerNet.](assets/training_result%201.png)
 
 Loss and accuracy graphs of SimpleConvNet. The loss decreases stablely compare to TwoLayerNet.
 
@@ -555,7 +555,7 @@ Loss: Cross Entropy
 
 ---
 
-![Ubuntu 22.04.3 LTS with NVIDIA RTX A5000](asset/SmartSelect_20250427_160255_Termux.jpg)
+![Ubuntu 22.04.3 LTS with NVIDIA RTX A5000](assets/SmartSelect_20250427_160255_Termux.jpg)
 
 Ubuntu 22.04.3 LTS with NVIDIA RTX A5000
 
@@ -563,7 +563,7 @@ Ubuntu 22.04.3 LTS with NVIDIA RTX A5000
 
 ---
 
-![Structure of ConvNet.](asset/SmartSelect_20250427_161958_Samsung_Notes.jpg)
+![Structure of ConvNet.](assets/SmartSelect_20250427_161958_Samsung_Notes.jpg)
 
 Structure of ConvNet.
 
@@ -626,7 +626,7 @@ class CustomDataset(Dataset):
 
 ---
 
-![Loss and accuracy graphs of ConvNet. Used 16 epoch, 0.01 learning rate and SGD optimizer.](asset/training_result_cnn.png)
+![Loss and accuracy graphs of ConvNet. Used 16 epoch, 0.01 learning rate and SGD optimizer.](assets/training_result_cnn.png)
 
 Loss and accuracy graphs of ConvNet. Used 16 epoch, 0.01 learning rate and SGD optimizer.
 
